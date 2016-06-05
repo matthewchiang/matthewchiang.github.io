@@ -15,15 +15,18 @@
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       nowConnectedDoSomething();
+
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
+      	document.getElementById('loggedinStatus').innerHTML = 'Please log ' +
+        	'into this app.';
+    	document.getElementById('showWhenNotLog').style.display = 'block';
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
+      	document.getElementById('loggedinStatus').innerHTML = 'Please log ' +
+        	'into Facebook.';
+        document.getElementById('showWhenNotLog').style.display = 'block';
     }
   	}
 
@@ -57,7 +60,7 @@
 
 	</script>
 
-	<div id = 'showWhenNotLog'>
+	<div id = 'showWhenNotLog' style = 'display:none'>
 		
 		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 
@@ -70,14 +73,14 @@
 
 	</div>
 
-	<div id='whoami'>Who am i?</div>
+	<div id='whoami'></div>
 
-	<div id='printhere'>Replace me with text when you log in</div>
+	<div id='loggedinStatus'></div>
 
 
 	<script>
 		function nowConnectedDoSomething(response) {
-			document.getElementById('printhere').innerHTML = 'Logged in!';
+			document.getElementById('loggedinStatus').innerHTML = 'Logged in!';
 			document.getElementById('showWhenNotLog').style.display = 'none';
 
 			FB.api('/me', function(response) {
