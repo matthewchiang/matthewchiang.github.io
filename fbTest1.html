@@ -57,18 +57,18 @@
 
 	</script>
 
-    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+	<div id = 'showWhenNotLog'>
+		
+		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 
-    <div
-  		class="fb-like"
-  		data-share="true"
-  		data-width="450"
-  		data-show-faces="true">
+		<div
+			class="fb-like"
+			data-share="true"
+			data-width="450"
+			data-show-faces="true">
+		</div>
+
 	</div>
-
-	<h1>Welcome to my page</h1>
-	This is the body<br>
-	Just added login button
 
 	<div id='printhere'>Replace me with text when you log in</div>
 
@@ -76,6 +76,7 @@
 	<script>
 		function nowConnectedDoSomething() {
 			document.getElementById('printhere').innerHTML = 'Logged in!';
+			document.getElementById('showWhenNotLog').style.display = 'none';
 		}
 
 	</script>
