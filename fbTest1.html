@@ -2,7 +2,7 @@
 <html>
 <title>Matt's FB API Test</title>
 
-<body>
+<body id='body'>
 
 	<script>
 
@@ -183,7 +183,20 @@
 			trailimage[0] = img1;
 			document.getElementById('loggedinStatus').innerHTML += '<br>' + img1;
 
-			document.write('<div id="trailimageid" style="position:absolute;visibility:visible;left:0px;top:0px;width:1px;height:1px"><img src="'+trailimage[0]+'" border="0" width="'+trailimage[1]+'px" height="'+trailimage[2]+'px"></div>')
+			var trailimgdiv = document.createElement('div');
+			trailimgdiv.id = 'trailimgid';
+			trailimgdiv.style = "position:absolute;visibility:visible;left:0px;top:0px;width:1px;height:1px";
+
+			var trailimg = document.createElement('img');
+			trailimg.src = img1;
+			trailimg.border = 0
+			trailimg.width = '-50px';
+			trailimg.height = '-50px';
+
+			trailimgdiv.appendChild(trailimg);
+			document.getElementById('body').appendChild(trailimgdiv);
+
+			//document.write('<div id="trailimageid" style="position:absolute;visibility:visible;left:0px;top:0px;width:1px;height:1px"><img src="'+img1+'" border="0" width="'+trailimage[1]+'px" height="'+trailimage[2]+'px"></div>')
 			//document.getElementById("trailimageid").src = img1;
 			//document.getElementById("trailimageid").style.display = 'block';
 			document.onmousemove=followmouse;
