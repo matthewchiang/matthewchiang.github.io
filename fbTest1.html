@@ -61,9 +61,16 @@
 	</script>
 
 
+
+
+
 	<div>
 
-		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+		<fb:login-button id = 'loginbtn' scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+
+		<div id = 'logoutbtn' style = 'display:none' onclick = 'window.location.reload();'>
+			<fb:login-button autologoutlink="true"></fb:login-button>
+		</div>
 
 		<div
 			class="fb-like"
@@ -75,21 +82,22 @@
 	</div>
 
 
-	<div id = 'logoutbtn' style = 'display:none' onclick = 'window.location.reload();'>
-		<fb:login-button autologoutlink="true"></fb:login-button>
-	</div>
 
 	<br>
 
-	<div id='whoami'>whoami</div>
+	<div id='whoami'></div>
 
-	<div id='loggedinStatus'>loggedinstatus</div>
+	<div id='loggedinStatus'></div>
+
+
+
+
 
 
 	<script>
 		function nowConnectedDoSomething(response) {
 			document.getElementById('loggedinStatus').innerHTML = 'Logged in!';
-			//document.getElementById('showWhenNotLog').style.display = 'none';
+			document.getElementById('loginbtn').style.display = 'none';
 			document.getElementById('logoutbtn').style.display = 'block';
 
 			FB.api('/me', function(response) {
