@@ -123,7 +123,7 @@
 				if (response && !response.error) {
 				console.log("Got profile photo");
 				console.log(response.data.url);
-				document.getElementById('propic').src = '/me?fields=picture';
+				document.getElementById('propic').src = response.data.url;
 				} else {
 				console.log("didn't get profile photo");
 				}
