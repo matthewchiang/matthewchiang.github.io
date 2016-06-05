@@ -62,8 +62,8 @@
 
 	<div id = 'showWhenNotLog' style = 'display:none'>
 
-		<fb:login-button autologoutlink='true' onlogin = 'checkLoginState()'></fb:login-button>
-		<!--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>-->
+		<!--<fb:login-button autologoutlink='true' onlogin = 'checkLoginState()'></fb:login-button>-->
+		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 
 		<div
 			class="fb-like"
@@ -76,14 +76,14 @@
 
 	<!--<button id="fbLogout1" class = 'fb-login-button' onclick="fbLogout()"><a class="fb_button fb_button_medium"><span class="fb_button_text">Logout from Facebook</span></a></button>-->
 
-	<fb:login-button id = 'logoutButton' style = 'display:block' autologoutlink='true' onclick = 'fbLogout()'></fb:login-button>
-
-	<fb:login-button id = 'logoutButton2' style = 'display:block' onclick = 'fbLogout()'></fb:login-button>
-
-	<fb:login-button onclick = 'fbLogout()'></fb:login-button>
-
-	<fb:logout-button onclick = 'fbLogout()'></fb:logout-button>
-
+	Logout button with auto and others: <fb:login-button id = 'logoutButton' style = 'display:block' autologoutlink='true' onclick = 'fbLogout()'></fb:login-button>
+<br>
+	Login button with just auto: <fb:login-button autologoutlink = 'true'></fb:login-button>
+<br>
+	Login button with onclick logout: <fb:login-button onclick = 'fbLogout()'></fb:login-button>
+<br>
+	Logout button: <fb:logout-button onclick = 'fbLogout()'></fb:logout-button>
+<br>
 
 	<br>
 
