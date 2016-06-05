@@ -118,7 +118,7 @@
 
 
 		function getProfilePhoto() {
-			FB.api("/me/pictures",
+			FB.api("/me/picture",
 			function(response) {
 				if (response && !response.error) {
 				console.log("Got profile photo");
