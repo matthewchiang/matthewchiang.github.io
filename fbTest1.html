@@ -123,7 +123,7 @@
 				if (response && !response.error) {
 				console.log("Got profile photo");
 				document.getElementById('propic').src = response.data.url;
-				mouseFollow(response.data.url);
+				//mouseFollow(response.data.url);
 				} else {
 				console.log("Didn't get profile photo");
 				}
@@ -131,7 +131,6 @@
 			);
 		}
 
-		function mouseFollow(myimg) {
 
 			var trailimage=['https://67.media.tumblr.com/6e9cab5ecdcc0f187a5eb88b1c2a8f88/tumblr_nbc8c1hhWQ1tdbmuio1_500.gif', 100, 100] //image path, plus width and height
 			var offsetfrommouse=[-50,-50] //image x,y offsets from cursor position in pixels. Enter 0,0 for no offset
@@ -182,7 +181,6 @@
 			if (displayduration>0)
 				setTimeout("hidetrail()", displayduration*1000)
 
-		}
 
 
 	</script>
