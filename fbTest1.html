@@ -61,7 +61,7 @@
 	</script>
 
 
-	<div id = 'showWhenNotLog' style = 'display:block'>
+	<div>
 
 		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 
@@ -76,6 +76,7 @@
 
 	<button onclick = 'FB.logout(function(response){ window.location.reload(); });'>Click here to logout</button>
 
+	<fb:login-button autologoutlink="true"></fb:login-button>
 
 
 	<br>
