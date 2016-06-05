@@ -83,16 +83,16 @@
 
 	<br>
 
-	<div id='whoami'></div>
+	<div id='whoami'>whoami</div>
 
-	<div id='loggedinStatus'></div>
+	<div id='loggedinStatus'>loggedinstatus</div>
 
 
 	<script>
 		function nowConnectedDoSomething(response) {
 			document.getElementById('loggedinStatus').innerHTML = 'Logged in!';
 			document.getElementById('showWhenNotLog').style.display = 'none';
-			document.getElementById('logoutButton').style.display = 'block';
+			//document.getElementById('logoutButton').style.display = 'block';
 
 			FB.api('/me', function(response) {
       			document.getElementById('whoami').innerHTML =
