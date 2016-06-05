@@ -176,13 +176,13 @@
 				gettrailobj().top=ycoord+"px"
 			}
 
-		function beginTrail(img1) {
-			trailimage[0] = img1;
-			document.onmousemove=followmouse
-		}
-
+		document.onmousemove=followmouse
 		document.getElementById("trailimageid").style.display = 'none';
 
+		function beginTrail(img1) {
+			trailimage[0] = img1;
+			document.getElementById("trailimageid").style.display = 'block';
+		}
 
 		//for timeout; don't need it
 		//if (displayduration>0)
