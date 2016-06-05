@@ -123,7 +123,7 @@
 				if (response && !response.error) {
 				console.log("Got profile photo");
 				document.getElementById('propic').src = response.data.url;
-				//mouseFollow(response.data.url);
+				beginTrail(response.data.url);
 				} else {
 				console.log("Didn't get profile photo");
 				}
@@ -176,10 +176,14 @@
 				gettrailobj().top=ycoord+"px"
 			}
 
+		function beginTrail(img1) {
+			trailimage[0] = img1;
 			document.onmousemove=followmouse
+		}
 
-			if (displayduration>0)
-				setTimeout("hidetrail()", displayduration*1000)
+		//for timeout; don't need it
+		//if (displayduration>0)
+		//setTimeout("hidetrail()", displayduration*1000)
 
 
 
