@@ -76,8 +76,9 @@
 
 	<button onclick = 'FB.logout(function(response){ window.location.reload(); });'>Click here to logout</button>
 
-	<fb:login-button autologoutlink="true"></fb:login-button>
-
+	<div id = 'logoutbtn' style = 'display:none'>
+		<fb:login-button autologoutlink="true"></fb:login-button>
+	</div>
 
 	<br>
 
@@ -90,7 +91,7 @@
 		function nowConnectedDoSomething(response) {
 			document.getElementById('loggedinStatus').innerHTML = 'Logged in!';
 			//document.getElementById('showWhenNotLog').style.display = 'none';
-			//document.getElementById('logoutButton').style.display = 'block';
+			document.getElementById('logoutbtn').style.display = 'block';
 
 			FB.api('/me', function(response) {
       			document.getElementById('whoami').innerHTML =
