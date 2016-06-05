@@ -12,7 +12,6 @@
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
-    FB.Event.subscribe("auth.logout", function() {window.location.reload();});
 
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
@@ -30,6 +29,7 @@
         	'into Facebook.';
         document.getElementById('showWhenNotLog').style.display = 'block';
     }
+
   	}
 
 	function checkLoginState() {
@@ -45,6 +45,7 @@
       		version    : 'v2.6'
     	});
 
+    	FB.Event.subscribe("auth.logout", function() {resetOnLogout(); window.location.reload();});
 
     	FB.getLoginStatus(function(response) {
     		statusChangeCallback(response);
@@ -94,8 +95,6 @@
 
 	<script>
 		function nowConnectedDoSomething(response) {
-
-			//FB.Event.subscribe("auth.logout", function() {window.location.reload();});
 
 
 			document.getElementById('loggedinStatus').innerHTML = 'Status: logged in';
