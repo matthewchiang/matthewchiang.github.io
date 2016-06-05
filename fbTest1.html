@@ -68,9 +68,7 @@
 
 		<fb:login-button id = 'loginbtn' scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 
-		<span id = 'logoutbtn' style = 'display:none' onclick = 'resetOnLogout();'>
-			<fb:login-button autologoutlink="true"></fb:login-button>
-		</span>
+		<fb:login-button id = 'logoutbtn' style = 'display:none' autologoutlink="true"></fb:login-button>
 
 		<div
 			class="fb-like"
@@ -96,9 +94,9 @@
 
 	<script>
 		function nowConnectedDoSomething(response) {
-			document.getElementById('loggedinStatus').innerHTML = 'Logged in!';
-			document.getElementById('loginbtn').style.display = 'none';
+			document.getElementById('loggedinStatus').innerHTML = 'Status: logged in';
 			document.getElementById('logoutbtn').style.display = 'block';
+			document.getElementById('loginbtn').style.display = 'none';
 
 			FB.api('/me', function(response) {
       			document.getElementById('whoami').innerHTML =
