@@ -61,7 +61,7 @@
 	</script>
 
 	<div id = 'showWhenNotLog' style = 'display:none'>
-		<fb:login-button scope autologoutlink = 'true'></fb:login-button>
+
 		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 
 		<div
@@ -73,6 +73,10 @@
 
 	</div>
 
+	<span style = 'display:none' id="fbLogout" onclick="fbLogout()"><a class="fb_button fb_button_medium"><span class="fb_button_text">Logout</span></a></span>
+
+	<br>
+
 	<div id='whoami'></div>
 
 	<div id='loggedinStatus'></div>
@@ -82,6 +86,7 @@
 		function nowConnectedDoSomething(response) {
 			document.getElementById('loggedinStatus').innerHTML = 'Logged in!';
 			document.getElementById('showWhenNotLog').style.display = 'none';
+			document.getElementById('fbLogout').style.display = 'block';
 
 			FB.api('/me', function(response) {
       			document.getElementById('whoami').innerHTML =
@@ -89,6 +94,13 @@
     		});
 
 		}//end nowConnectedDoSomething
+
+		function fbLogout() {
+	        FB.logout(function (response) {
+	            window.location.reload();
+    	    });
+
+		}
 
 	</script>
 
