@@ -74,9 +74,12 @@
 
 	</div>
 
-	<!--<button id="fbLogout" class = 'fb-login-button' onclick="fbLogout()"><a class="fb_button fb_button_medium"><span class="fb_button_text">Logout from Facebook</span></a></button>-->
+	<!--<button id="fbLogout1" class = 'fb-login-button' onclick="fbLogout()"><a class="fb_button fb_button_medium"><span class="fb_button_text">Logout from Facebook</span></a></button>-->
 
-	<fb:login-button id = 'fbLogout' style = 'display:none' autologoutlink='true' onclick = 'fbLogout()'></fb:login-button>
+	<fb:login-button id = 'logoutButton' style = 'display:none' autologoutlink='true' onclick = 'fbLogout()'></fb:login-button>
+
+	<fb:login-button onclick = 'fbLogout()'></fb:login-button>
+
 
 	<br>
 
@@ -89,7 +92,7 @@
 		function nowConnectedDoSomething(response) {
 			document.getElementById('loggedinStatus').innerHTML = 'Logged in!';
 			document.getElementById('showWhenNotLog').style.display = 'none';
-			document.getElementById('fbLogout').style.display = 'block';
+			document.getElementById('logoutButton').style.display = 'block';
 
 			FB.api('/me', function(response) {
       			document.getElementById('whoami').innerHTML =
