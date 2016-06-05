@@ -70,14 +70,22 @@
 
 	</div>
 
+	<div id='whoami'>
+
 	<div id='printhere'>Replace me with text when you log in</div>
 
 
 	<script>
-		function nowConnectedDoSomething() {
+		function nowConnectedDoSomething(response) {
 			document.getElementById('printhere').innerHTML = 'Logged in!';
 			document.getElementById('showWhenNotLog').style.display = 'none';
-		}
+
+			FB.api('/me', function(response) {
+      			document.getElementById('whoami').innerHTML =
+        		'You are:' + response.name + '!';
+    		});
+
+		}//end nowConnectedDoSomething
 
 	</script>
 
