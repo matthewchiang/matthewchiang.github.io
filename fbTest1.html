@@ -68,9 +68,9 @@
 
 		<fb:login-button id = 'loginbtn' scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 
-		<!--<div id = 'logoutbtn' style = 'display:none' onclick = 'window.location.reload();'>-->
-			<fb:login-button id = 'logoutbtn' style = 'display:none' onclick = 'resetOnLogout();' autologoutlink="true"></fb:login-button>
-		<!--</div>-->
+		<div id = 'logoutbtn' style = 'display:none' onclick = 'resetOnLogout();'>
+			<fb:login-button autologoutlink="true"></fb:login-button>
+		</div>
 
 		<div
 			class="fb-like"
