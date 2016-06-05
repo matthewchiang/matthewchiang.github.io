@@ -74,9 +74,8 @@
 
 	</div>
 
-	<button onclick = 'FB.logout(function(response){ window.location.reload(); });'>Click here to logout</button>
 
-	<div id = 'logoutbtn' style = 'display:none'>
+	<div id = 'logoutbtn' style = 'display:none' onclick = 'window.location.reload();'>
 		<fb:login-button autologoutlink="true"></fb:login-button>
 	</div>
 
