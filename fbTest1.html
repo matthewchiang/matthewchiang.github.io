@@ -74,11 +74,9 @@
 
 	</div>
 
-	<button id="fbLogout" class = 'fb-login-button' onclick="fbLogout()"><a class="fb_button fb_button_medium"><span class="fb_button_text">Logout from Facebook</span></a></button>
+	<!--<button id="fbLogout" class = 'fb-login-button' onclick="fbLogout()"><a class="fb_button fb_button_medium"><span class="fb_button_text">Logout from Facebook</span></a></button>-->
 
-	<fb:login-button autologoutlink='true' onclick = 'fbLogout()'></fb:login-button>
-
-	<fb:login-button onclick = 'fbLogout()'></fb:login-button>
+	<fb:login-button id = 'fbLogout' style = 'display:none' autologoutlink='true' onclick = 'fbLogout()'></fb:login-button>
 
 	<br>
 
