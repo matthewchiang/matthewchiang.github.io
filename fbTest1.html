@@ -70,7 +70,7 @@
 
 	</div>
 
-	<div id='whoami'>
+	<div id='whoami'/>
 
 	<div id='printhere'>Replace me with text when you log in</div>
 
@@ -82,7 +82,7 @@
 
 			FB.api('/me', function(response) {
       			document.getElementById('whoami').innerHTML =
-        		'You are:' + response.name + '!';
+        		'You are: ' + response.name + '!';
     		});
 
 		}//end nowConnectedDoSomething
