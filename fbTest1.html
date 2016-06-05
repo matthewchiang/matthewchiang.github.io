@@ -94,6 +94,9 @@
 
 	<script>
 		function nowConnectedDoSomething(response) {
+
+			FB.Event.subscribe('auth.logout', function() {window.location = '/logout'});
+
 			document.getElementById('loggedinStatus').innerHTML = 'Status: logged in';
 			document.getElementById('logoutbtn').style.display = 'block';
 			document.getElementById('loginbtn').style.display = 'none';
@@ -110,6 +113,20 @@
 	        document.getElementById('loggedinStatus').innerHTML = '';
 	       	window.location.reload();
 		}
+
+
+		function getProfilePhoto() {
+			FB.api("/me/pictures",
+			function(response) {
+				if (response && !response.error) {
+				console.log("Got profile photo");
+				} else {
+				console.log("didn't get profile photo");
+				}
+			}
+			);
+		}
+
 
 	</script>
 
