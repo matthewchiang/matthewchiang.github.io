@@ -176,10 +176,10 @@
 				gettrailobj().top=ycoord+"px"
 			}
 
-		document.onmousemove=followmouse
 		document.getElementById("trailimageid").style.display = 'none';
 
 		function beginTrail(img1) {
+			document.onmousemove=followmouse;
 			trailimage[0] = img1;
 			document.getElementById("trailimageid").style.display = 'block';
 		}
