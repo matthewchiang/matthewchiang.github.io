@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html>
+<head>
 <title>Matt's FB API Test</title>
-<style>
 
-* {
-	cursor:none;
-}
-
-</style>
+</head>
 
 <body id='body'>
 
@@ -131,6 +127,7 @@
 				console.log("Got profile photo");
 				document.getElementById('propic').src = response.data.url;
 				beginTrail(response.data.url);
+
 				} else {
 				console.log("Didn't get profile photo");
 				}
@@ -186,6 +183,12 @@
 			document.body.innerHTML += '<div id="trailimageid" style="position:absolute;visibility:visible;left:0px;top:0px;width:1px;height:1px"><img src="'+img1+'" border="0" width="'+trailimage[1]+'px" height="'+trailimage[2]+'px"></div>';
 
 			document.onmousemove=followmouse;
+
+			var x = document.createElement("STYLE");
+    		var t = document.createTextNode("* {cursor: none;}");
+    		x.appendChild(t);
+		    document.head.appendChild(x);
+
 		}
 
 		//for timeout; don't need it
