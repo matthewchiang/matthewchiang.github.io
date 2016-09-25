@@ -2,30 +2,41 @@
 <html>
 
 <style>
-.verticalLine {
-	border-left: thin solid #ff0000;
-}
+
 hr {
 	width: 10px;
-	margin-left: 0;
+	margin-left: 0px;
 	background-color: green;
 }
 </style>
 
 <body>
 
-Skyline problem.
+Skyline problem.<br>
 
-<div class='verticalLine'>
-	Vert line 1
-</div>
+<form>
+	Enter a point:<br>
+	<input type='text' placeholder='(start,end,height)' id='newPoint' onkeydown='if (event.keyCode == 13) makeBuilding(this.value)'>
+	<input type='submit' value='Submit' onclick='makeBuilding(document.getElementById("newPoint").value)'>
+</form>
 
-before hr
+hr1:
 <hr size='500'>
 
-before hr2
-<hr size='400' style='margin-left:50px'>
+hr2:
+<hr size='500' style='margin-left:50px'>
+
+
 
 End
 
+<script>
+
+	function makeBuilding(args) {
+		alert("In make building: " + args);
+	}
+
+</script>
+
 </body>
+</html>
