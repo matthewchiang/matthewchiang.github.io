@@ -4,7 +4,7 @@
 <style>
 
 hr {
-	width: 10px;
+	width: 100px;
 	margin-left: 0px;
 	background-color: green;
 }
@@ -21,7 +21,7 @@ Skyline problem.<br>
 <br><br>
 
 <button onclick='alertPointList()'>
-	Display
+	Alert List
 </button>
 
 <br>
@@ -31,6 +31,15 @@ Skyline problem.<br>
 	</tr>
 </table>
 
+
+<br><br>
+
+<button onClick='displayGraph()'>Display graph</button>
+<button onClick='initCalcSkyline()'>Calculate Skyline</button>
+<div id='graph'>
+	Display here
+</div>
+
 <!--
 hr1:
 <hr size='500'>
@@ -39,25 +48,61 @@ hr2:
 <hr size='500' style='margin-left:50px'>
 -->
 
-
 <script>
 
 	var pointList = []
 
 	function makeBuilding(args) {
-		pointList += args;
+
+		if(args == '' || args.length < 7) return;
+
+		pointList.push(args);
 
 		//add to table for visibility
 		var newTableItem = document.createElement('td');
 		newTableItem.innerHTML = args;
-		document.getElementById('pointTableRow').appendChild(newTableItem);
-		document.getElementById('pointTable').border = 1; //make lines visible after first item
+		document.getElementById('pointTableRow').appendChild(newTableItem); //add new item to row
 
+		document.getElementById('pointTable').border = 1; //make lines visible after first item
 		document.getElementById('newPoint').value = ''; //reset input form
 	}
 
 	function alertPointList() {
 		alert(pointList);
+	}
+
+	function initCalcSkyline() {
+		document.getElementById('graph').innerHTML = '';
+		calculateSkylineRecursive(pointList);
+	}
+
+	function calculateSkylineRecursive(curPointList) {
+		if(curPointList.length < 2) return curPointList;
+
+		else {
+			//split in half and recursively call
+			var halfIndex = curPointList.length / 2; //half rounded down
+			var firstHalfList = curPointList.slice(0,halfIndex);
+			var secondHalfList = curPointList.slice(halfIndex);
+
+			var result = mergeSkylines(calculateSkylineRecursive(firstHalfList), calculateSkylineRecursive(secondHalfList));
+			return result;
+		}
+		//for(var i = 0; i < pointList.length; i++)
+		//	document.getElementById('graph').innerHTML += '<br>' + i;
+	}
+
+	function mergeSkylines(list1, list2) {
+		//var resultList = [];
+		document.getElementById('graph').innerHTML += 'running merge ' + list1.concat(list2) + '<br>';//list1 + list2;
+		return (list1); 
+	}
+
+	function displayGraph() {
+		var newBuilding = document.createElement('hr');
+		newBuilding.size=100; //equal to height
+		//use style to change width (end - start) and align-left (start)
+		document.getElementById('graph').appendChild(newBuilding);
 	}
 
 </script>
