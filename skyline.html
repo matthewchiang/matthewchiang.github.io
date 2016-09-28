@@ -37,12 +37,7 @@ All points:
 
 <button onClick='initCalcSkyline()'>Calculate Skyline</button>
 <button onClick='displayGraph()'>Display graph</button>
-<div id='graph'>
-	Display here
-</div>
-
-
-
+<div id='graph'></div>
 
 
 <script>
@@ -56,10 +51,9 @@ All points:
 		this.height = coordinates.substring(0, coordinates.indexOf(')'));
 	}
 
-	//var critPointList = [];
 	var criticalPoint = function(x,y) {
-		this.x = x;
-		this.y = y;
+		this.x = Number(x);
+		this.y = Number(y);
 	}
 
 
@@ -97,43 +91,26 @@ All points:
 			critPointList.push(rightCrit);
 		}
 
-		//sort list by start value
-		critPointList.sort(function(a,b) {
-			if (a.start > b.start) return 1;
-			if (a.start < b.start) return -1;
-			return 0;
-		});
 
+		/* debug: print critical point list
 		for(var j = 0; j < critPointList.length; j++) {
-			alert(critPointList[j].x);
-		}
-
-
-		/*
-		rawPointList.sort(function(a,b) {
-			if (a.start > b.start) return 1;
-			if (a.start < b.start) return -1;
-			return 0;
-		});
-
-		//convert all raw points to critical points
-		for(var i = 0; i < rawPointList.length; i++) {
-			var leftCrit = new criticalPoint(list1[i].start, list1[i].height);
-			var rightCrit = new criticalPoint(list1[i].end, 0);
-			list1Crit.push(leftCrit);
-			list1Crit.push(rightCrit);
-		}
-		*/
+			alert(critPointList[j].x + ', ' + critPointList[j].y);
+		}*/
 
 
 		var result = calculateSkylineRecursive(critPointList);
 		//result is merged skyline
-		alert('done ' + result.length);
+		
+		//print final skyline
+		for (var j = 0; j < result.length; j++) {
+			document.getElementById('graph').innerHTML += '(' + result[j].x + ',' + result[j].y + ')<br>';
+		}
 	}
 
 	//recursive function where divide and conquer takes place
 	function calculateSkylineRecursive(curPointList) {
-		if(curPointList.length < 2) return curPointList;
+		
+		if(curPointList.length < 4) return curPointList;
 
 		else {
 			//split in half and recursively call
@@ -156,70 +133,67 @@ All points:
 //		document.getElementById('graph').innerHTML += 'running merge ' + list1.concat(list2) + '<br>';//list1 + list2;
 
 		var resultList = [];
-		var list1Crit = [];
-		var list2Crit = [];
-		var currentHeight = 0;
-		var currentx = 0;
+		var sky1Height = 0;
+		var sky2Height = 0;
 
-// convert to critical points
-/*
-		for(var i = 0; i < list1.length; i++) {
-			var leftCrit = new criticalPoint(list1[i].start, list1[i].height);
-			var rightCrit = new criticalPoint(list1[i].end, 0);
-			list1Crit.push(leftCrit);
-			list1Crit.push(rightCrit);
+		// debug: print list1 and list2
+		/*
+		for(var j = 0; j < list1.length; j++) {
+			alert(list1[j].x + ', ' + list1[j].y);
 		}
-
-		for(var j = 0; j < list2.length; j++) {
-			var leftCrit = new criticalPoint(list2[j].start, list2[j].height);
-			var rightCrit = new criticalPoint(list2[j].end, 0);
-			list2Crit.push(leftCrit);
-			list2Crit.push(rightCrit);
+		for(var q = 0; q < list2.length; q++) {
+			alert(list2[q].x + ', ' + list2[q].y);
 		}
 		*/
+		//alert('size of list1: ' + list1.length);
+		//alert('size of list2: ' + list2.length);
+		
 
 //add next value (by x) to result list
-		for(var i = 0; i < Math.min(list1Crit.length, list2Crit.length); i++) {
+		var i = 0;
+		while(list1.length != 0 || list2.length != 0) {
 			
-			if (list1Crit[i].x < list2Crit[i].x) {
+			if ( (list2.length == 0) || (list1.length != 0 && list1[i].x < list2[i].x) ) {
 				//list1 item is next
-				resultList.push(list1Crit[i]);
-				list1Crit.splice(i,1);
+				alert('adding list 1 item: ' + list1[i].x + ', ' + list1[i].y);
+
+				sky1Height = list1[i].y;
+
+				var itemToPush = new criticalPoint(list1[i].x, Math.max(sky1Height, sky2Height));
+				resultList.push(itemToPush);
+				
+				list1.splice(i,1);
 			}
 
-			else if (list1Crit[i].x > list2Crit[i].x) {
+			else if ( (list1.length == 0) || (list2.length != 0 && list1[i].x > list2[i].x) ) {
 				//list2 item is next
-				resultList.push(list2Crit[i]);
-				list2Crit.splice(i,1);
+				alert('adding list 2 item: ' + list2[i].x + ', ' + list2[i].y);
+
+				sky2Height = list2[i].y;
+
+				var itemToPush = new criticalPoint(list2[i].x, Math.max(sky1Height, sky2Height));
+				resultList.push(itemToPush);
+				
+				list2.splice(i,1);
 			}
 
 			else { //next critical point has same x
 				//take only max of 2 points
 
-				if (list1Crit[i].y > list2Crit[i].y) {
-					resultList.push(list1Crit);
+				if (list1[i].y > list2[i].y) {
+					resultList.push(list1[i]);
 				}
-				else resultList.push(list2Crit);
+				else resultList.push(list2[i]);
 				
-				list1Crit.splice(i,1);
-				list2Crit.splice(i,1);
+				list1.splice(i,1);
+				list2.splice(i,1);
 
 			}
 
-			//var nextPoint = Math.min(list1Crit[i], list2Crit[i]);
 
+		} //end while
 
-			/*if(list1[i].start > list2[i].start) {
-				alert('list 1 is greater');
-			}
-			else if (list1[i].start < list2[i].start) {
-				alert('list 2 is greater');
-			}
-			else {
-				alert('lists are equal');
-			}*/
-		}
-
+		//alert('exiting merge. resultList size: ' + resultList.length);
 		return (resultList); 
 	}
 
@@ -229,11 +203,22 @@ All points:
 
 	//Display skyline in HTML
 	function displayGraph() {
-		var newBuilding = document.createElement('hr');
-		newBuilding.size=100; //equal to height
-		//use style to change width (end - start) and align-left (start)
-		//ex: <hr size='500' style='margin-left:50px'>
-		document.getElementById('graph').appendChild(newBuilding);
+
+		document.getElementById('graph').innerHTML = '';
+
+		for(var i = 0; i < rawPointList.length; i++) {
+
+
+			var newBuilding = document.createElement('hr');
+			newBuilding.size = rawPointList[i].height; //equal to height
+			//use style to change width (end - start) and margin-left (start)
+			//ex: <hr size='500' style='margin-left:50px'>
+			newBuilding.style.width = (rawPointList[i].end - rawPointList[i].start);
+			newBuilding.style.marginLeft = rawPointList[i].start;
+			document.getElementById('graph').appendChild(newBuilding);
+			//document.getElementById('endDoc').insertBefore(newBuilding);
+
+		}
 	}
 
 </script>
