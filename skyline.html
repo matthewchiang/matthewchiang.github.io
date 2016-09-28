@@ -14,7 +14,7 @@ hr {
 
 <strong>Skyline problem</strong>
 <br>
-Please note: error checking is NOT extensive, so please follow the correct format of (start, end, height) with non-negative integers.
+Please note: input verification is NOT extensive, so please follow the correct format of (start, end, height) with non-negative integers.
 <br><br>
 
 	Enter a point:<br>
@@ -47,7 +47,7 @@ All points:
 
 <script>
 
-	var rawPointList = []
+	var rawPointList = [];
 	var rawPoint = function(coordinates) { //parse point from HTML into structure
 		this.start = coordinates.substring(1,coordinates.indexOf(','));
 		coordinates = coordinates.substring(coordinates.indexOf(',')+1);
@@ -56,6 +56,7 @@ All points:
 		this.height = coordinates.substring(0, coordinates.indexOf(')'));
 	}
 
+	//var critPointList = [];
 	var criticalPoint = function(x,y) {
 		this.x = x;
 		this.y = y;
@@ -63,17 +64,17 @@ All points:
 
 
 	//receive new point from HTML; parse and store
-	function makeBuilding(newBuildingPoint) {
+	function makeBuilding(newBuildingDimensions) {
 
-		if(newBuildingPoint == '' || newBuildingPoint.length < 7) return;
+		if(newBuildingDimensions == '' || newBuildingDimensions.length < 7) return;
 
 
-		var argsPoint = new rawPoint(newBuildingPoint);
+		var argsPoint = new rawPoint(newBuildingDimensions);
 		rawPointList.push(argsPoint);
 
 		//add to table for visibility
 		var newTableItem = document.createElement('td');
-		newTableItem.innerHTML = newBuildingPoint;
+		newTableItem.innerHTML = newBuildingDimensions;
 		document.getElementById('pointTableRow').appendChild(newTableItem); //add new item to row
 
 		document.getElementById('pointTable').border = 1; //make lines visible after first item
@@ -87,17 +88,47 @@ All points:
 	function initCalcSkyline() {
 		document.getElementById('graph').innerHTML = '';
 
+		var critPointList = [];
+		//convert all raw points to critical points
+		for (var i = 0; i < rawPointList.length; i++) {
+			var leftCrit = new criticalPoint(rawPointList[i].start, rawPointList[i].height);
+			var rightCrit = new criticalPoint(rawPointList[i].end, 0);
+			critPointList.push(leftCrit);
+			critPointList.push(rightCrit);
+		}
+
 		//sort list by start value
+		critPointList.sort(function(a,b) {
+			if (a.start > b.start) return 1;
+			if (a.start < b.start) return -1;
+			return 0;
+		});
+
+		for(var j = 0; j < critPointList.length; j++) {
+			alert(critPointList[j].x);
+		}
+
+
+		/*
 		rawPointList.sort(function(a,b) {
 			if (a.start > b.start) return 1;
 			if (a.start < b.start) return -1;
 			return 0;
 		});
 
-		//convert raw points to critical points
+		//convert all raw points to critical points
+		for(var i = 0; i < rawPointList.length; i++) {
+			var leftCrit = new criticalPoint(list1[i].start, list1[i].height);
+			var rightCrit = new criticalPoint(list1[i].end, 0);
+			list1Crit.push(leftCrit);
+			list1Crit.push(rightCrit);
+		}
+		*/
 
 
-		calculateSkylineRecursive(rawPointList);
+		var result = calculateSkylineRecursive(critPointList);
+		//result is merged skyline
+		alert('done ' + result.length);
 	}
 
 	//recursive function where divide and conquer takes place
@@ -113,7 +144,7 @@ All points:
 			//sort lists by start
 
 			var result = mergeSkylines(calculateSkylineRecursive(firstHalfList), calculateSkylineRecursive(secondHalfList));
-			return result;
+			return result; //result should be merged skyline
 		}
 
 
@@ -130,6 +161,8 @@ All points:
 		var currentHeight = 0;
 		var currentx = 0;
 
+// convert to critical points
+/*
 		for(var i = 0; i < list1.length; i++) {
 			var leftCrit = new criticalPoint(list1[i].start, list1[i].height);
 			var rightCrit = new criticalPoint(list1[i].end, 0);
@@ -143,7 +176,9 @@ All points:
 			list2Crit.push(leftCrit);
 			list2Crit.push(rightCrit);
 		}
+		*/
 
+//add next value (by x) to result list
 		for(var i = 0; i < Math.min(list1Crit.length, list2Crit.length); i++) {
 			
 			if (list1Crit[i].x < list2Crit[i].x) {
