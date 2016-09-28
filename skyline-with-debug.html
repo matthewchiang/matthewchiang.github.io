@@ -2,6 +2,7 @@
 <html>
 
 <style>
+
 hr {
 	width: 100px;
 	margin-left: 0px;
@@ -35,7 +36,7 @@ All points:
 <br><br><br>
 
 <button onClick='initCalcSkyline()'>Calculate Skyline</button>
-<!--<button onClick='displayGraph()'>Display graph</button>-->
+<button onClick='displayGraph()'>Display graph</button>
 <div id='graph'></div>
 
 
@@ -45,10 +46,7 @@ All points:
 //*****************Data structures***************************
 
 	var rawPointList = [];
-
-	//constructor for rawPoint object
-	//parse point from HTML
-	var rawPoint = function(coordinates) { 
+	var rawPoint = function(coordinates) { //parse point from HTML into structure
 		this.start = coordinates.substring(1,coordinates.indexOf(','));
 		coordinates = coordinates.substring(coordinates.indexOf(',')+1);
 		this.end = coordinates.substring(0,coordinates.indexOf(','));
@@ -56,7 +54,6 @@ All points:
 		this.height = coordinates.substring(0, coordinates.indexOf(')'));
 	}
 
-	//constructor for criticalPoint object
 	var criticalPoint = function(x,y) {
 		this.x = Number(x);
 		this.y = Number(y);
@@ -67,11 +64,11 @@ All points:
 	//receive new point from HTML; parse and store
 	function makeBuilding(newBuildingDimensions) {
 
-		if(newBuildingDimensions.length < 7) return;
+		if(newBuildingDimensions == '' || newBuildingDimensions.length < 7) return;
 
 
-		var argPoint = new rawPoint(newBuildingDimensions);
-		rawPointList.push(argPoint);
+		var argsPoint = new rawPoint(newBuildingDimensions);
+		rawPointList.push(argsPoint);
 
 		//add to table for visibility
 		var newTableItem = document.createElement('td');
@@ -97,6 +94,12 @@ All points:
 			critPointList.push(leftCrit);
 			critPointList.push(rightCrit);
 		}
+
+
+		/* debug: print critical point list
+		for(var j = 0; j < critPointList.length; j++) {
+			alert(critPointList[j].x + ', ' + critPointList[j].y);
+		}*/
 
 
 		//recursive call
@@ -131,24 +134,32 @@ All points:
 
 	//merge function
 	function mergeSkylines(list1, list2) {
+//		document.getElementById('graph').innerHTML += 'running merge ' + list1.concat(list2) + '<br>';//list1 + list2;
 
 		var resultList = [];
 		var sky1Height = 0;
 		var sky2Height = 0;
 
+		// debug: print list1 and list2
+		/*
+		for(var j = 0; j < list1.length; j++) {
+			alert(list1[j].x + ', ' + list1[j].y);
+		}
+		for(var q = 0; q < list2.length; q++) {
+			alert(list2[q].x + ', ' + list2[q].y);
+		}
+		*/
+		//alert('size of list1: ' + list1.length);
+		//alert('size of list2: ' + list2.length);
+		
 
-		//add next value (by x) to result list
+//add next value (by x) to result list
 		var i = 0;
 		while(list1.length != 0 || list2.length != 0) {
 			
 			if ( (list2.length == 0) || (list1.length != 0 && list1[i].x < list2[i].x) ) {
 				//list1 item is next
-
-				//if repeat, ignore
-				if(list1[i].y == sky1Height) {
-					list1.splice(i,1);
-					continue;
-				}
+				alert('adding list 1 item: ' + list1[i].x + ', ' + list1[i].y);
 
 				sky1Height = list1[i].y;
 
@@ -160,12 +171,7 @@ All points:
 
 			else if ( (list1.length == 0) || (list2.length != 0 && list1[i].x > list2[i].x) ) {
 				//list2 item is next
-
-				//if repeat, ignore
-				if(list2[i].y == sky2Height) {
-					list2.splice(i,1);
-					continue;
-				}
+				alert('adding list 2 item: ' + list2[i].x + ', ' + list2[i].y);
 
 				sky2Height = list2[i].y;
 
@@ -179,14 +185,10 @@ All points:
 				//take only max of 2 points
 
 				if (list1[i].y > list2[i].y) {
-					sky1Height = list1[i].y;
 					resultList.push(list1[i]);
 				}
-				else {
-					sky2Height = list2[i].y
-					resultList.push(list2[i]);
-				}
-
+				else resultList.push(list2[i]);
+				
 				list1.splice(i,1);
 				list2.splice(i,1);
 
@@ -195,13 +197,7 @@ All points:
 
 		} //end while
 
-		//remove repeats y values
-		for(var i = 0; i < resultList.length-1; i++) {
-			if (resultList[i].y == resultList[i+1].y) {
-				resultList.splice(i+1,1);
-			}
-		}
-
+		//alert('exiting merge. resultList size: ' + resultList.length);
 		return (resultList); 
 	}
 
