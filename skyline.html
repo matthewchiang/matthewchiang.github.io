@@ -213,8 +213,8 @@ All points:
 			newBuilding.size = rawPointList[i].height; //equal to height
 			//use style to change width (end - start) and margin-left (start)
 			//ex: <hr size='500' style='margin-left:50px'>
-			newBuilding.style.width = (rawPointList[i].end - rawPointList[i].start);
-			newBuilding.style.marginLeft = rawPointList[i].start;
+			newBuilding.style.width = (rawPointList[i].end - rawPointList[i].start) + 'px';
+			newBuilding.style.marginLeft = rawPointList[i].start + 'px';
 			document.getElementById('graph').appendChild(newBuilding);
 			//document.getElementById('endDoc').insertBefore(newBuilding);
 
