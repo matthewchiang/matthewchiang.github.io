@@ -20,20 +20,27 @@ Skyline problem.<br>
 	<input type='submit' value='Submit' onclick='makeBuilding(document.getElementById("newPoint").value)'>
 </form>
 
+<br><br>
+<form>
+<input type='text' placeholder='Default' id='pointList'>
+</form>
+
+
+<!--
 hr1:
 <hr size='500'>
 
 hr2:
 <hr size='500' style='margin-left:50px'>
+-->
 
-
-
-End
 
 <script>
 
 	function makeBuilding(args) {
-		alert("In make building: " + args);
+		//alert("In make building: " + args);
+		//document.getElementById('pointList').innerHTML += args;
+		document.getElementById('pointList').value += args;
 	}
 
 </script>
