@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lighting Example</title>
+	<meta charset="utf-8" />
+</head>
+
+<body onload = "startWebGL()">
+
+	<canvas id="draw_surface" width="400" height="400">
+		Browser does not support WebGL
+	</canvas>
+
+	<!--<script src="http://benvanik.github.com/WebGL-Inspector/core/embed.js"></script>-->
+
+
+	<br>
+	Directional Light X:<br>
+	<input type="range" min="-10" max="10" value="1" id="dirSourceX"><br>
+	Directional Light Y:<br>
+	<input type="range" min="-10" max="10" value="1" id="dirSourceY"><br>
+	Directional Light Z:<br>
+	<input type="range" min="-10" max="10" value="-1" id="dirSourceZ"><br>
+
+	Ambient Light Color:<br>
+	<input type="range" min="0" max="255" value="20" id="ambientLightColor"><br>
+
+	Shininess:<br>
+	<input type="range" min="1" max="100" value="10" id="shininess"><br>	
+
+	
+	<script src="gl-matrix/dist/gl-matrix.js"></script>
+	<script src="basicModelLibrary.js"></script>
+	<script src="CameraClass.js"></script>
+	// <script src="Lighting-G-Ph.js"></script>
+	<!-- // <script src="Lighting-G-G.js"></script> -->
+	<!-- // <script src="LightingOrig.js"></script> -->
+	<!--<script src="Lighting-Ph-Ph.js"></script>-->
+</body>
+</html>
