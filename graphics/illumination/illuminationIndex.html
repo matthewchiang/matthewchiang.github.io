@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<title>Lighting Example</title>
@@ -15,6 +15,13 @@
 
 
 	<br>
+	Shader program:<br>
+	<select id="shaderSelect">
+		<option value="0">Original</option>
+		<option value="1">Gouraud-Gouraud</option>
+		<option value="2">Gouraud-Phong</option>
+		<option value="3">Phong-Phong</option>
+	</select><br><br>
 	Directional Light X:<br>
 	<input type="range" min="-10" max="10" value="1" id="dirSourceX"><br>
 	Directional Light Y:<br>
@@ -26,15 +33,12 @@
 	<input type="range" min="0" max="255" value="20" id="ambientLightColor"><br>
 
 	Shininess:<br>
-	<input type="range" min="1" max="100" value="10" id="shininess"><br>	
+	<input type="range" min="1" max="100" value="10" id="shininess"><br>
 
 	
 	<script src="gl-matrix/dist/gl-matrix.js"></script>
 	<script src="basicModelLibrary.js"></script>
 	<script src="CameraClass.js"></script>
-	// <script src="Lighting-G-Ph.js"></script>
-	<!-- // <script src="Lighting-G-G.js"></script> -->
-	<!-- // <script src="LightingOrig.js"></script> -->
-	<!--<script src="Lighting-Ph-Ph.js"></script>-->
+	<script src="Lighting_combined.js"></script>
 </body>
 </html>

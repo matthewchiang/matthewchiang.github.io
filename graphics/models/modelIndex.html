@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>3DModels</title>
+	<meta charset="utf-8" />
+</head>
+
+<body onload = "fetchMain()">
+
+	<canvas id="draw_surface" width="400" height="400">
+		Browser does not support WebGL
+	</canvas>
+
+	<!--<script src="http://benvanik.github.com/WebGL-Inspector/core/embed.js"></script>-->
+
+
+	<br>
+	Rendering type:<br>
+	<select id="renderSelect">
+		<option value="0">Solid</option>
+		<option value="1">Wire frame</option>
+	</select><br><br>
+	Shader program:<br>
+	<select id="shaderSelect" value ="3">
+		<option value="0">Original</option>
+		<option value="1">Gouraud-Gouraud</option>
+		<option value="2">Gouraud-Phong</option>
+		<option value="3" selected="selected">Phong-Phong</option>
+	</select><br><br>
+	Toggle dummy movement:<br>
+	<input type="checkbox" id="toggleMovement" checked><br>
+	Toggle background:<br>
+	<input type="checkbox" id="toggleBackground"><br>
+	Directional Light Source X:<br>
+	<input type="range" min="-200" max="200" value="1" id="dirSourceX"><br>
+	Directional Light Source Y:<br>
+	<input type="range" min="-200" max="200" value="100" id="dirSourceY"><br>
+	Directional Light Source Z:<br>
+	<input type="range" min="-200" max="200" value="100" id="dirSourceZ"><br>
+
+	
+	<script src="gl-matrix/dist/gl-matrix.js"></script>
+	<script src="basicModelLibrary.js"></script>
+	<script src="CameraClass.js"></script>
+	<script src="fetch3DImage.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
